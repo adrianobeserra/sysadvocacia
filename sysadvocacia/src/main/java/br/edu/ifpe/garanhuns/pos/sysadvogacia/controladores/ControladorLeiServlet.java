@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ewerton
  */
-@WebServlet(name = "ControladorLeiServlet", urlPatterns = {"/SalvarLei", "/RemoverLei", "/ListarLeis"})
+@WebServlet(name = "ControladorLeiServlet", urlPatterns = {"/SalvarLei", "/RemoverLei", "/ListarLeis","/ListarLeis"})
 public class ControladorLeiServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,25 +47,30 @@ public class ControladorLeiServlet extends HttpServlet {
         
         NegocioLei negocioLei = new NegocioLei();
         
+        Processo proc = new Processo();
+        proc.setCodigo(1);
+                
         Lei lei;
         
+        
         if (userPath.equals("/SalvarLei")) {
+            
             lei = new Lei();
-            Processo proc = new Processo();
+            
             if (!request.getParameter("codigo").isEmpty()) {
                 lei.setCodigo(Integer.parseInt(request.getParameter("codigo")));
             } else {                
-                lei.setCodigo(0);
-           
+                lei.setCodigo(0);           
             }
-
-            lei.setArtigo(Integer.parseInt(request.getParameter("artigo")));
-            lei.setCapitulo(Integer.parseInt(request.getParameter("capitulo")));
+            lei.setArtigo(Integer.parseInt(request.getParameter("artigo"))); 
             lei.setDescricao(request.getParameter("descricao"));
-            lei.setTipo(request.getParameter("tipo"));
+            lei.setTipo(request.getParameter("tipo"));                      
+            lei.setCapitulo(Integer.parseInt(request.getParameter("capitulo")));   
+           
             lei.setProcessoCodigo(proc);
-
+            
             String json = new Gson().toJson(negocioLei.salvar(lei));
+            
             response.getWriter().print(json);
         }
         

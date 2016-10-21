@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "lei")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Lei.findAll", query = "SELECT l FROM Lei l")})
+@NamedQuery(name = "Lei.findAll", query = "SELECT l FROM Lei l")})
+
+
 public class Lei implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,6 +60,7 @@ public class Lei implements Serializable {
         this.codigo = codigo;
     }
 
+    
     public Integer getCodigo() {
         return codigo;
     }
@@ -77,7 +81,7 @@ public class Lei implements Serializable {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(String tipo) {        
         this.tipo = tipo;
     }
 
@@ -96,11 +100,11 @@ public class Lei implements Serializable {
     public void setArtigo(Integer artigo) {
         this.artigo = artigo;
     }
-
+    @XmlTransient 
     public Processo getProcessoCodigo() {
         return processoCodigo;
     }
-
+    
     public void setProcessoCodigo(Processo processoCodigo) {
         this.processoCodigo = processoCodigo;
     }

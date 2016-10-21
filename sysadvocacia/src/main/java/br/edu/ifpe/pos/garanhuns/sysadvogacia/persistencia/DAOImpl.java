@@ -26,6 +26,11 @@ public abstract class DAOImpl<T, I extends Serializable> implements DAO<T, I> {
         entityManager = factory.createEntityManager();
     }
 
+    /**
+     *
+     * @param entity
+     * @return
+     */
     @Override
     public T save(T entity) {
         T saved = null;
